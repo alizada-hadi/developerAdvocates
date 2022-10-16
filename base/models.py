@@ -1,3 +1,4 @@
+from enum import unique
 from django.db import models
 
 
@@ -5,7 +6,7 @@ class Company(models.Model):
     name = models.CharField(max_length=200)
     about = models.TextField(null=True, blank=True)
     address =models.CharField(max_length=500, null=True, blank=True)
-    logo = models.ImageField(upload_to="company/logos", default="logo.jpg")
+    logo = models.URLField(max_length=200, unique=True)
 
     def __str__(self):
         return self.name
@@ -28,7 +29,7 @@ class Advocate(models.Model):
     short_bio = models.CharField(max_length=500)
     long_bio = models.TextField(null=True, blank=True)
     years_of_exp = models.SmallIntegerField(default=1)
-    profile_pic = models.ImageField(upload_to="advocate/profile", default="profile.jpg")
+    profile_pic = models.URLField(max_length=200, unique=True)
 
     def __str__(self):
         return self.name
@@ -65,7 +66,7 @@ class Project(models.Model):
     advocate = models.ForeignKey(Advocate, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
-    sample_photo = models.ImageField(upload_to="project/sample", null=True, blank=True)
+    sample_photo = models.URLField(max_length=200, unique=True)
     likes = models.ManyToManyField(Advocate, null=True, blank=True, related_name="likes")
     created_at = models.DateTimeField(null=True, blank=True)
 

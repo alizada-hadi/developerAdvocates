@@ -88,7 +88,7 @@ class CompanySerializer(serializers.ModelSerializer):
     branches = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Company
-        fields = ['id', 'name', 'about', 'address', 'logo', 'advocates', 'branches']
+        fields = ['id', 'name', 'about', 'address', 'logo', 'branches', 'advocates']
 
     def get_advocates(self, obj):
         advocates = obj.advocate_set.all()
