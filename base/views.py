@@ -11,6 +11,18 @@ from django.db.models import Q
 I am using function base views to create the following endpoints. 
 
 """
+@api_view(['GET'])
+def endpoints(request):
+    apis = [
+        "https://developer-advocate.herokuapp.com/api/companies", 
+        "https://developer-advocate.herokuapp.com/api/company/1", 
+        "https://developer-advocate.herokuapp.com/api/advocates",  
+        "https://developer-advocate.herokuapp.com/api/advocate/1", 
+        "https://developer-advocate.herokuapp.com/api/projects", 
+
+    ]
+
+    return Response(apis)
 
 
 # fetch all companies
@@ -26,7 +38,7 @@ def get_companies(request):
     # filter data based on received search and filter params
     companies = Company.objects.filter(name__icontains=query)
     # items per page
-    paginator.page_size = 2
+    paginator.page_size = 1
 
     page = paginator.paginate_queryset(companies, request)
     serializer = CompanySerializer(page, many=True)

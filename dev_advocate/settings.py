@@ -72,6 +72,10 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
+}
+
 WSGI_APPLICATION = 'dev_advocate.wsgi.application'
 
 
