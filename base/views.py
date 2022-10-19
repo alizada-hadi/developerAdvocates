@@ -7,10 +7,11 @@ from .serializers import CompanySerializer, AdvocateSerializer, ProjectSerialize
 from rest_framework.pagination import PageNumberPagination
 from django.db.models import Q
 
+
 """*
 I am using function base views to create the following endpoints. 
-
 """
+
 @api_view(['GET'])
 def endpoints(request):
     apis = [
@@ -19,9 +20,7 @@ def endpoints(request):
         "https://developer-advocate.herokuapp.com/api/advocates",  
         "https://developer-advocate.herokuapp.com/api/advocate/1", 
         "https://developer-advocate.herokuapp.com/api/projects", 
-
     ]
-
     return Response(apis)
 
 
@@ -38,7 +37,7 @@ def get_companies(request):
     # filter data based on received search and filter params
     companies = Company.objects.filter(name__icontains=query)
     # items per page
-    paginator.page_size = 1
+    paginator.page_size = 9
 
     page = paginator.paginate_queryset(companies, request)
     serializer = CompanySerializer(page, many=True)
@@ -66,7 +65,7 @@ def get_advocates(request):
         # filter advocates based on thier skills
         Q(skill__title=query)
         ).distinct() # to avoid returning duplicate data we use distinct method
-    paginator.page_size = 2
+    paginator.page_size = 5
     page = paginator.paginate_queryset(advocates, request)
     serializer = AdvocateSerializer(page, many=True)
     return paginator.get_paginated_response(serializer.data)
@@ -92,7 +91,7 @@ def get_projects(request):
         Q(title__icontains=query) |
         Q(description__icontains=query)
         )
-    paginator.page_size = 2
+    paginator.page_size = 5
     page = paginator.paginate_queryset(projects, request)
     serializer = ProjectSerializer(page, many=True)
     return paginator.get_paginated_response(serializer.data)
