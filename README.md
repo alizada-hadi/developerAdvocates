@@ -1,6 +1,6 @@
 # Developer Advocate _API_
 
-This project provides _API_ that shows developers information from various idustries. This _API_ simply outputs the list of developers, thier company they work at, list of projects they have built, and finally the list of skills each developer has.
+This project provides _API_ that shows developers information from different companies. This _API_ simply outputs the list of developers, companies they work in, list of projects they have built, skills they have, and finally list of companies with thier branches.
 
 ## Availabe Endpoints
 
