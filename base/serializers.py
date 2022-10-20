@@ -4,7 +4,6 @@ from .models import Branch, Company, SocialAccount, Advocate, Project, Skill, Te
 # ? Serializing the models
 
 # First we serialize our skill models
-
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
@@ -91,9 +90,8 @@ class CompanySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'about', 'address', 'logo', 'branches', 'advocates']
 
     def get_advocates(self, obj):
-        advocates = obj.advocate_set.all()
-        serializer = AdvocateSerializer(advocates, many=True)
-        return serializer.data
+        return [adv.id for adv in obj.advocate_set.all()]
+        
 
     def get_branches(self, obj):
         branches = obj.branch_set.all()
